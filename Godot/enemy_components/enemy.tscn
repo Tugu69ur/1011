@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqp00cruiis0o"]
+
+[ext_resource type="Script" path="res://mainScripts/EnemyToken.gd" id="11_nvb7i"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cgb7e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihix1"]
+height = 66.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg4lq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_245tk"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_jqbv7"]
+script/source = "extends Node
+class_name Damageable
+signal  on_hit(node: Node, damage_taken : int)
+
+@export var health := 30:
+	get:
+		return health
+	set(value):
+		Global.emit_signal(\"on_health_changed\", get_parent(), value - health)
+		health = value
+
+func hit(damage : int):
+	health -= damage
+	print(\"damaged by 10\")
+	emit_signal(\"on_hit\", get_parent(),damage)
+
+		
+
+
+func _on_timer_timeout():
+	get_parent().queue_free()
+"
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 9
+
+[node name="SpriteSheet" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_cgb7e")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Weapon" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_ihix1")
+
+[node name="HealtBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = -39.0
+offset_right = 15.0
+offset_bottom = -35.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xg4lq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_245tk")
+value = 50.0
+rounded = true
+show_percentage = false
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+
+[node name="Patrol" type="Node" parent="EnemyStateMachine"]
+
+[node name="Timer" type="Timer" parent="EnemyStateMachine/Patrol"]
+
+[node name="Chase" type="Node" parent="EnemyStateMachine"]
+
+[node name="Hit" type="Node" parent="EnemyStateMachine"]
+
+[node name="Attack" type="Node" parent="EnemyStateMachine"]
+
+[node name="Dead" type="Node" parent="EnemyStateMachine"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -43.0
+offset_top = -4.0
+offset_right = 2.0
+offset_bottom = 19.0
+text = "State:             "
+
+[node name="DetectArea" type="Area2D" parent="."]
+position = Vector2(0, -46)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectArea"]
+position = Vector2(5, -8)
+scale = Vector2(3.77033, 5.77685)
+polygon = PackedVector2Array(0, 0, 183, -21, 191, -13, 195, -5, 197, 2, 198, 13, 197, 22, 195, 30, 189, 41, 182, 48)
+
+[node name="Damageable" type="Node" parent="."]
+script = SubResource("GDScript_jqbv7")
+
+[node name="EnemyToken" type="Node" parent="."]
+script = ExtResource("11_nvb7i")
+
+[connection signal="body_entered" from="DetectArea" to="EnemyStateMachine/Patrol" method="_on_detect_area_body_entered"]

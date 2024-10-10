@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bblepgd20yfja"]
+
+[ext_resource type="Script" path="res://Entities/Player/arrow.gd" id="1_0gooo"]
+[ext_resource type="Texture2D" uid="uid://dcerf0pue0n2r" path="res://assets gg/Samurai_2/Arrow.png" id="1_rwicq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aoiko"]
+radius = 2.5
+height = 62.5
+
+[node name="Arrow" type="Area2D"]
+collision_layer = 4
+collision_mask = 14
+script = ExtResource("1_0gooo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rwicq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -8.88178e-16)
+rotation = 4.71239
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CapsuleShape2D_aoiko")
+one_way_collision_margin = 0.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

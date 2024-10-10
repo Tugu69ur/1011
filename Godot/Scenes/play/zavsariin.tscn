@@ -1,0 +1,215 @@
+[gd_scene load_steps=24 format=3 uid="uid://clw17n30q0tmg"]
+
+[ext_resource type="Script" path="res://Scripts/zavsariin.gd" id="1_djrrj"]
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="2_olgjk"]
+[ext_resource type="Texture2D" uid="uid://b0onh4u7brqtk" path="res://Vid/right-arrow.png" id="3_bmw5e"]
+[ext_resource type="Texture2D" uid="uid://du6aa80bdwqrc" path="res://Vid/gamer (1).png" id="3_ps7ro"]
+[ext_resource type="Texture2D" uid="uid://dgojypgoau5o6" path="res://Vid/battle.png" id="4_qipwi"]
+[ext_resource type="FontFile" uid="uid://b304kctevhwix" path="res://font/PixelifySans-VariableFont_wght.ttf" id="6_v0ujo"]
+[ext_resource type="Texture2D" uid="uid://pusu171tehnn" path="res://assets gg/Lancer.png" id="7_iqios"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksnnf"]
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy0wa"]
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k67q"]
+bg_color = Color(0.838897, 0.838897, 0.838897, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40f3u"]
+bg_color = Color(0.58787, 0.607684, 0.578067, 1)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_2bxcx"]
+Button/styles/disabled = SubResource("StyleBoxFlat_ksnnf")
+Button/styles/focus = SubResource("StyleBoxFlat_iy0wa")
+Button/styles/hover = SubResource("StyleBoxFlat_6k67q")
+Button/styles/normal = SubResource("StyleBoxFlat_40f3u")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wn2wt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ufog"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4lcf"]
+atlas = ExtResource("7_iqios")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h58w"]
+atlas = ExtResource("7_iqios")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5yyi"]
+atlas = ExtResource("7_iqios")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uthvw"]
+atlas = ExtResource("7_iqios")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7hlw"]
+atlas = ExtResource("7_iqios")
+region = Rect2(400, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg6cs"]
+atlas = ExtResource("7_iqios")
+region = Rect2(500, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0txs2"]
+atlas = ExtResource("7_iqios")
+region = Rect2(600, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqp2a"]
+atlas = ExtResource("7_iqios")
+region = Rect2(700, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pn407"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4lcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h58w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5yyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uthvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7hlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg6cs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0txs2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqp2a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_djrrj")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(578, 201.75)
+scale = Vector2(1.24353, 1.12421)
+texture = ExtResource("2_olgjk")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 255.0
+offset_right = 849.0
+offset_bottom = 337.0
+theme_override_font_sizes/font_size = 50
+text = "Singleplayer"
+icon = ExtResource("3_ps7ro")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 365.0
+offset_right = 849.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 50
+text = "Multiplayer"
+icon = ExtResource("4_qipwi")
+icon_alignment = 2
+
+[node name="Back" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 84.0
+offset_top = 644.0
+offset_right = 160.0
+offset_bottom = 707.0
+rotation = 3.14159
+theme = SubResource("Theme_2bxcx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wn2wt")
+icon = ExtResource("3_bmw5e")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.662745)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -474.0
+offset_top = 33.0
+offset_right = 418.0
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("6_v0ujo")
+theme_override_font_sizes/font_size = 100
+text = "Quiz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.662745)
+offset_left = 165.0
+offset_top = 102.0
+offset_right = 1057.0
+offset_bottom = 222.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("6_v0ujo")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6ufog")
+text = "Rush"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1081, 550)
+scale = Vector2(2.2, 2.23875)
+sprite_frames = SubResource("SpriteFrames_pn407")
+autoplay = "default"
+frame_progress = 0.863705
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

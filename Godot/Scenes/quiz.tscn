@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://brbf76essggqe"]
+
+[ext_resource type="Script" path="res://Scenes/quiz.gd" id="1_0o8qa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2d55"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x02qw"]
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ms5yb"]
+bg_color = Color(0.0825507, 0.0972728, 0.120829, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5yk6m"]
+modulate_color = Color(0.129412, 0.14902, 0.180392, 1)
+
+[node name="Quizz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0o8qa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 318.0
+offset_bottom = 159.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "As"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w2d55")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x02qw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ms5yb")
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_5yk6m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x02qw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ms5yb")
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_5yk6m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x02qw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ms5yb")
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_5yk6m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x02qw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ms5yb")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_button_4_pressed"]

@@ -1,0 +1,172 @@
+[gd_scene load_steps=10 format=3 uid="uid://c278k4ce3csi1"]
+
+[ext_resource type="Script" path="res://Scripts/login.gd" id="1_wly2q"]
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="2_s2fdm"]
+[ext_resource type="Texture2D" uid="uid://cbrc826al8n75" path="res://Vid/7123025_logo_google_g_icon.png" id="3_ohoy0"]
+[ext_resource type="FontFile" uid="uid://b304kctevhwix" path="res://font/PixelifySans-VariableFont_wght.ttf" id="4_0r10e"]
+[ext_resource type="Texture2D" uid="uid://mhuowuwucxwo" path="res://Vid/3225194_app_facebook_logo_media_popular_icon.png" id="5_jga7u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50k3i"]
+bg_color = Color(0.0941176, 0.466667, 0.94902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Animation" id="Animation_jvop4"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qnwvf"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbclq"]
+_data = {
+"fade_in": SubResource("Animation_jvop4"),
+"fade_out": SubResource("Animation_qnwvf")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wly2q")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(577.5, 203)
+scale = Vector2(1.24461, 1.12484)
+texture = ExtResource("2_s2fdm")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 236.0
+offset_right = 546.0
+offset_bottom = 259.0
+text = "Password"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 469.0
+offset_top = 172.0
+offset_right = 549.0
+offset_bottom = 195.0
+text = "Username"
+
+[node name="EmailInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 194.0
+offset_right = 693.0
+offset_bottom = 225.0
+text = "t@gmail.com"
+
+[node name="PasswordInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 469.0
+offset_top = 261.0
+offset_right = 696.0
+offset_bottom = 292.0
+text = "password69"
+
+[node name="LoginButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 315.0
+offset_right = 695.0
+offset_bottom = 346.0
+text = "Login / Sign up"
+
+[node name="LoginGoogle" type="Button" parent="."]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 362.0
+offset_right = 695.0
+offset_bottom = 393.0
+text = "   Sign in with Google"
+icon = ExtResource("3_ohoy0")
+alignment = 0
+expand_icon = true
+
+[node name="LoginFB" type="Button" parent="."]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 409.0
+offset_right = 695.0
+offset_bottom = 440.0
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0r10e")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_50k3i")
+text = "Sign in with Facebook"
+icon = ExtResource("5_jga7u")
+expand_icon = true
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lbclq")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="LoginGoogle" to="." method="_on_login_button_2_pressed"]
+[connection signal="pressed" from="LoginFB" to="." method="_on_login_fb_pressed"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://chiaobr3sl0yx"]
+
+[ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_u3ux4"]
+[ext_resource type="PackedScene" uid="uid://dfg0macbkork1" path="res://Werewolf.tscn" id="2_iduvw"]
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="4_8e4a6"]
+[ext_resource type="Texture2D" uid="uid://bv1w8a2jrxgr5" path="res://assets gg/greenbar (1).png" id="4_pdewd"]
+[ext_resource type="Texture2D" uid="uid://dxjae045oakuw" path="res://assets gg/greenbar (11).png" id="5_pk88c"]
+[ext_resource type="Texture2D" uid="uid://cv2fv4whd3ywt" path="res://Werewolf/Werewolf/Werewolf1.png" id="6_ailja"]
+[ext_resource type="Texture2D" uid="uid://cxea33qlsdphq" path="res://assets gg/Knight1.png" id="7_f86cp"]
+[ext_resource type="FontFile" uid="uid://b304kctevhwix" path="res://font/PixelifySans-VariableFont_wght.ttf" id="8_wgvs0"]
+[ext_resource type="PackedScene" uid="uid://djr0ly705347w" path="res://Knight.tscn" id="9_mvjlv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wsrjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_va3sq"]
+size = Vector2(1153, 111)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_u3ux4")
+playerScene = ExtResource("2_iduvw")
+
+[node name="SpawnPoint" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(279, 412)
+
+[node name="SpawnPoint2" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(738, 412)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(988, 326)
+texture = ExtResource("4_8e4a6")
+region_enabled = true
+region_rect = Rect2(0, 137.571, 1980, 655.429)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1030, 593)
+shape = SubResource("WorldBoundaryShape2D_wsrjf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 250)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_wsrjf")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1980, 250)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_wsrjf")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(163, 759)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(415, -1)
+scale = Vector2(3.62188, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(414.5, -112.5)
+shape = SubResource("RectangleShape2D_va3sq")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_iduvw")]
+position = Vector2(76, 538)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(308, 203)
+scale = Vector2(2.4931, 2.18276)
+texture = ExtResource("4_pdewd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(830, 204)
+scale = Vector2(2.4931, 2.18276)
+texture = ExtResource("5_pk88c")
+flip_h = true
+
+[node name="Werewolf1" type="Sprite2D" parent="."]
+position = Vector2(1919, 108)
+scale = Vector2(4.61778, 6.8)
+texture = ExtResource("6_ailja")
+
+[node name="Knight1" type="Sprite2D" parent="."]
+position = Vector2(-516, 128)
+scale = Vector2(5.24318, 6.175)
+texture = ExtResource("7_f86cp")
+flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 518.0
+offset_top = 49.0
+offset_right = 645.0
+offset_bottom = 162.0
+grow_horizontal = 2
+color = Color(0.132437, 0.128608, 0.163234, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 130.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("8_wgvs0")
+theme_override_font_sizes/font_size = 30
+text = "4:31"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("9_mvjlv")]
+position = Vector2(785, 538)

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://btpwvceblbai2"]
+
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="1_n128y"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_wrgwn"]
+[ext_resource type="PackedScene" uid="uid://d0hr74xcha3ft" path="res://Emtities/Player/player.tscn" id="2_c78h6"]
+[ext_resource type="PackedScene" uid="uid://yu2ksfqa2dr6" path="res://UI/pause_menu.tscn" id="4_4v5w5"]
+[ext_resource type="PackedScene" uid="uid://b5yfb4336mem1" path="res://Scenes/main1.tscn" id="5_fw836"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1n5jn"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_wrgwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(988, 326)
+texture = ExtResource("1_n128y")
+region_enabled = true
+region_rect = Rect2(0, 137.571, 1980, 655.429)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1030, 593)
+shape = SubResource("WorldBoundaryShape2D_1n5jn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 250)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_1n5jn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1980, 250)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_1n5jn")
+
+[node name="Player" parent="." instance=ExtResource("2_c78h6")]
+position = Vector2(1030, 527)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_4v5w5")]
+offset_left = 2.0
+offset_right = 2.0
+
+[node name="Main1" parent="." instance=ExtResource("5_fw836")]
+offset = Vector2(0, -10)
+transform = Transform2D(1, 0, 0, 1, 0, -10)

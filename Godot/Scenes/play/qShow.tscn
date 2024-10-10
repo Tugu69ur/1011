@@ -1,0 +1,148 @@
+[gd_scene load_steps=3 format=3 uid="uid://b72l10ewoqn00"]
+
+[ext_resource type="Script" path="res://Scripts/qShow.gd" id="1_02q3i"]
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="2_kfhlv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_02q3i")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(577, 200.75)
+scale = Vector2(1.24353, 1.12421)
+texture = ExtResource("2_kfhlv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 380.0
+offset_bottom = 583.0
+
+[node name="info" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.5
+offset_right = 81.5
+offset_bottom = 20.0
+grow_horizontal = 2
+text = "With 4 answers	"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 594.0
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 48.0
+offset_right = 767.0
+offset_bottom = 582.0
+
+[node name="info" type="Label" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+text = "With one keyword"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Panel2"]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 49.0
+offset_bottom = 601.0
+
+[node name="Panel3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 773.0
+offset_top = 46.0
+offset_right = 1153.0
+offset_bottom = 581.0
+
+[node name="info" type="Label" parent="Panel3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_right = 42.0
+offset_bottom = 20.0
+grow_horizontal = 2
+text = "True/False"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Panel3"]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 52.0
+offset_bottom = 601.0
+
+[node name="info" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 354.0
+offset_top = -10.0
+offset_right = 793.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Choose your questions"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Done" type="Button" parent="."]
+layout_mode = 0
+offset_left = 987.0
+offset_top = 594.0
+offset_right = 1151.0
+offset_bottom = 645.0
+text = "Done"
+
+[connection signal="pressed" from="Done" to="." method="_on_done_pressed"]

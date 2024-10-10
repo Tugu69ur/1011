@@ -1,0 +1,230 @@
+[gd_scene load_steps=8 format=3 uid="uid://6pcqqtrwnraq"]
+
+[ext_resource type="Texture2D" uid="uid://c0v25x6bka0jd" path="res://Vid/right (1).png" id="1_cf6y0"]
+[ext_resource type="PackedScene" uid="uid://byv67t0hd4isc" path="res://Scenes/Menu/grid_container.tscn" id="4_jxq2r"]
+
+[sub_resource type="GDScript" id="GDScript_hn81h"]
+script/source = "extends Control
+
+@onready var grid_container: =$ClipControl/GridContainer/GridContainer
+@onready var play_button: Button = $PlayButton
+@onready var edit_button: Button = $EditButton
+
+var num_grids = 1
+var current_grid = 1
+var grid_width = 728
+var selected_level = 0  
+
+var level_data = []
+
+func _ready():
+	await fetch_levels_from_nakama()
+	num_grids = grid_container.get_child_count()
+	grid_width = grid_container.custom_minimum_size.x
+	connect_level_selected_to_level_box()
+
+	play_button.connect(\"pressed\", Callable(self, \"_on_play_button_pressed\"))
+	edit_button.connect(\"pressed\", Callable(self, \"_on_edit_button_pressed\"))
+
+func fetch_levels_from_nakama():
+	var dataList = await NakamaManager.client.list_storage_objects_async(NakamaManager.session, \"Levels\", NakamaManager.session.user_id, 50)
+	var objects = dataList.objects
+	var json_parser = JSON.new()
+	for obj in objects:
+		var parse_result = json_parser.parse(obj.value)
+		if parse_result == OK:
+			var data = json_parser.data
+			if data.has(\"Levels\"):
+				level_data = data[\"Levels\"]  
+	create_level_buttons()
+func create_level_buttons():
+	for child in grid_container.get_children():
+		grid_container.remove_child(child)
+		child.queue_free()  
+
+	for i in range(level_data.size()):
+		var level_info = level_data[i]  
+		var level_button = preload(\"res://Scenes/Menu/level_button.tscn\").instantiate()  
+		level_button.level_num = i + 1  
+		var label = level_button.get_node(\"Labell\")
+		label.text = level_info.map_name
+		NakamaManager.map_name = label.text
+		level_button.locked = false  
+		level_button.connect(\"level_selected\", Callable(self, \"_on_level_selected\"))
+		grid_container.add_child(level_button)
+
+func connect_level_selected_to_level_box():
+	for grid in grid_container.get_children():
+		for box in grid.get_children():
+			box.connect(\"level_selected\", Callable(self, \"_on_level_selected\"))
+
+func _on_level_selected(level_num: int):
+	
+	selected_level = level_num  
+
+func _on_play_button_pressed():
+	if selected_level > 0:
+		var next_level: String = \"res://Levels/level_\" + str(selected_level) + \".tscn\"
+		if FileAccess.file_exists(next_level):
+			get_tree().change_scene_to_file(next_level)
+		else:
+			print(\"Level does not exist\")
+
+func _on_edit_button_pressed():
+	pass
+
+func _on_back_button_pressed():
+	if current_grid > 1:
+		current_grid -= 1
+		animateGridPosition(grid_container.position.x + grid_width)
+
+func _on_next_button_pressed():
+	if current_grid < num_grids:
+		current_grid += 1
+		animateGridPosition(grid_container.position.x - grid_width)
+
+func animateGridPosition(finalValue):
+	create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).tween_property(
+		grid_container, \"position:x\", finalValue, 0.5
+	)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4x7pd"]
+bg_color = Color(0.113725, 0.121569, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jabc"]
+bg_color = Color(0.172549, 0.184314, 0.254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na02r"]
+bg_color = Color(0.113725, 0.121569, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2srb1"]
+bg_color = Color(0.113725, 0.121569, 0.168627, 1)
+
+[node name="Level_Selection" type="Control"]
+layout_mode = 3
+anchor_right = 0.765
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_right = -3.28003
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_hn81h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 9.00006
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labelnt" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.031
+offset_left = -119.0
+offset_top = 29.0
+offset_right = -25.0
+offset_bottom = 47.4
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.698467, 0.74015, 0.729552, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Levels"
+
+[node name="BackButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -47.0
+offset_right = 83.0
+offset_bottom = 27.0
+grow_vertical = 2
+texture_normal = ExtResource("1_cf6y0")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
+[node name="ClipControl" type="Control" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(728, 440)
+layout_mode = 1
+anchor_left = 0.083
+anchor_top = 0.177
+anchor_right = 0.912
+anchor_bottom = 0.91
+offset_left = -3.874
+offset_top = -17.2
+offset_right = -3.73602
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="ClipControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(728, 400)
+layout_mode = 0
+offset_right = 2194.0
+offset_bottom = 400.0
+theme_override_constants/separation = 130
+
+[node name="GridContainer" parent="ClipControl/GridContainer" instance=ExtResource("4_jxq2r")]
+layout_mode = 2
+
+[node name="GridContainer2" parent="ClipControl/GridContainer" instance=ExtResource("4_jxq2r")]
+layout_mode = 2
+
+[node name="NextButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.069
+anchor_bottom = 0.5
+offset_left = 656.0
+offset_top = -45.0
+offset_right = 662.418
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("1_cf6y0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 693.0
+offset_top = 352.0
+offset_right = 823.0
+offset_bottom = 392.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4x7pd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jabc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na02r")
+text = "Play"
+
+[node name="EditButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 693.0
+offset_top = 402.0
+offset_right = 823.0
+offset_bottom = 442.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2srb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jabc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_na02r")
+text = "Edit"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="EditButton" to="." method="_on_button_2_pressed"]

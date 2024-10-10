@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxjs2hgeop60d"]
+
+[ext_resource type="PackedScene" uid="uid://brbf76essggqe" path="res://Scenes/quiz.tscn" id="1_src1d"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Quizz" parent="." instance=ExtResource("1_src1d")]

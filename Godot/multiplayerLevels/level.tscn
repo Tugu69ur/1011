@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://btpwvceblbai2"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_4mbk7"]
+[ext_resource type="PackedScene" uid="uid://0pf3kbnhcsok" path="res://Player.tscn" id="2_7kekq"]
+[ext_resource type="Texture2D" uid="uid://w4uevn7obhnj" path="res://assets/background/Free Pixel Art Forest/Preview/Background.png" id="2_sfls5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1n5jn"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_4mbk7")
+playerScene = ExtResource("2_7kekq")
+
+[node name="SpawnPoint" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(219, 537)
+
+[node name="SpawnPoint2" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(878, 538)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(988, 326)
+texture = ExtResource("2_sfls5")
+region_enabled = true
+region_rect = Rect2(0, 137.571, 1980, 655.429)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1030, 593)
+shape = SubResource("WorldBoundaryShape2D_1n5jn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 250)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_1n5jn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1980, 250)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_1n5jn")

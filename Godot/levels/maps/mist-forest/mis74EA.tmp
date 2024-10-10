@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://be3al1a2pkwky"]
+
+[ext_resource type="Script" path="res://levels/maps/mist-forest/mist-forest.gd" id="1_tc5wj"]
+[ext_resource type="Texture2D" uid="uid://cx0sicvp5sf1v" path="res://levels/maps/mist-forest-background-previewx2.png" id="2_fpqqq"]
+[ext_resource type="PackedScene" uid="uid://yu2ksfqa2dr6" path="res://UI/pause_menu.tscn" id="3_0g1jn"]
+[ext_resource type="PackedScene" uid="uid://d0hr74xcha3ft" path="res://Entities/Player/samurai_archer/samurai_archer.tscn" id="4_16b7r"]
+[ext_resource type="PackedScene" uid="uid://dxntvjhp6uac3" path="res://Entities/Enemies/skeleton_archer/skeleton_archer.tscn" id="5_5cb43"]
+
+[sub_resource type="Theme" id="Theme_t0wft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50pdw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmd2y"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="MistForest" type="Node2D"]
+script = ExtResource("1_tc5wj")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(1.2234, 1.45313)
+texture = ExtResource("2_fpqqq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 940.18, 448)
+
+[node name="SpawnPointForEnemy" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(46, 275)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(156, 472)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(264, 473)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(821, 473)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(960, 474)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPointForEnemy"]
+position = Vector2(1078, 282)
+
+[node name="SpawnPointForPlayer" type="Node2D" parent="."]
+
+[node name="SinglePlayer" type="Marker2D" parent="SpawnPointForPlayer"]
+position = Vector2(554, 472)
+
+[node name="MultiPlayer1" type="Marker2D" parent="SpawnPointForPlayer"]
+position = Vector2(206, 472)
+
+[node name="MultiPlayer2" type="Marker2D" parent="SpawnPointForPlayer"]
+position = Vector2(895, 474)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="HUD"]
+offset_left = 43.0
+offset_top = 67.0
+offset_right = 443.0
+offset_bottom = 92.0
+theme = SubResource("Theme_t0wft")
+theme_override_styles/background = SubResource("StyleBoxFlat_50pdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pmd2y")
+value = 50.0
+show_percentage = false
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("3_0g1jn")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 14
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1, -1, -1, 374, 111, 372, 77, 407, 78, 561, 1057, 560, 1057, 402, 1025, 367, 1150, 367, 1149, 3, 1152, 643, -1, 644)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="SamuraiArcher" parent="." instance=ExtResource("4_16b7r")]
+position = Vector2(574, 496)
+collision_mask = 9
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
+
+[node name="SkeletonArcher" parent="." instance=ExtResource("5_5cb43")]
+visible = true
+position = Vector2(117, 559)
+anim_sprite = Object(AnimatedSprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, -65),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"sprite_frames":null,"animation":&"walk","autoplay":"","frame":0,"frame_progress":0.341623,"speed_scale":1.0,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":f
